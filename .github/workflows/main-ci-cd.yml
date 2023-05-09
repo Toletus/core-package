@@ -39,6 +39,6 @@ jobs:
 
       - name: Publish Toletus.Extensions on Nuget
         #run: dotnet nuget push "src/Toletus.Extensions/bin/Release/*.nupkg" -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/toletus/index.json --skip-duplicate
-        run:
+        run: |
           echo ${{ secrets.NUGET_API_KEY }}
           dotnet nuget push "src/Toletus.Extensions/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
