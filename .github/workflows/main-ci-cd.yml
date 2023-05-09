@@ -17,9 +17,9 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '7.0.x'
-          source-url: https://nuget.pkg.github.com/toletus/index.json
+          source-url: https://api.nuget.org/v3/index.json
         env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_API_KEY}}
 
       - name: Set version number environment variable
         env:
