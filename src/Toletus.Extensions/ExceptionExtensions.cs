@@ -27,14 +27,17 @@ namespace Toletus.Extensions
             {
                 environmentStackTraceLines.RemoveAt(0);
 
-                var stackTraceLines = GetStackTraceLines(exception.StackTrace);
+                var stackTraceLines = GetStackTraceLines(exception.StackTrace!);
                 stackTraceLines.AddRange(environmentStackTraceLines);
 
                 var fullStackTrace = string.Join(Environment.NewLine, stackTraceLines);
 
                 logMessage += Environment.NewLine + fullStackTrace;
             }
-            catch (Exception e) { }
+            catch (Exception)
+            {
+                // ignored
+            }
 
             return logMessage;
         }

@@ -24,7 +24,7 @@ namespace Toletus.Extensions
             return output;
         }
 
-        public static string[] ToHexStringArray(this byte[] byteArray)
+        public static string[]? ToHexStringArray(this byte[]? byteArray)
         {
             if (byteArray == null) return null;
 
@@ -36,9 +36,9 @@ namespace Toletus.Extensions
             return hexArray;
         }
 
-        public static string ToHexString(this byte[] byteArray, string separator = null)
+        public static string ToHexString(this byte[] byteArray, string? separator = null)
         {
-            return string.Join(separator ?? string.Empty, byteArray.ToHexStringArray());
+            return string.Join(separator ?? string.Empty, byteArray.ToHexStringArray()!);
         }
     }
 }
