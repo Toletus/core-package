@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Toletus.Extensions
+namespace Toletus.Pack.Core
 {
     public static class StringExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Toletus.Extensions
+namespace Toletus.Pack.Core
 {
     public static class ByteExtensions
     {

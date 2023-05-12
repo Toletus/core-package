@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toletus.Extensions", "src\Toletus.Extensions\Toletus.Extensions.csproj", "{BD970C66-0E6F-4F36-B174-704D9A30D886}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toletus.Pack.Core", "src\Toletus.Pack.Core\Toletus.Pack.Core.csproj", "{BD970C66-0E6F-4F36-B174-704D9A30D886}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
