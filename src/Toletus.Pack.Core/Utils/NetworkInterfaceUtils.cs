@@ -38,7 +38,6 @@ public abstract class NetworkInterfaceUtils
         return defaultInterface; // Return the default network interface or null if not found
     }
 
-
     public static Dictionary<string, IPAddress> GetNetworkInterfaces()
     {
         var redes = new Dictionary<string, IPAddress>();
