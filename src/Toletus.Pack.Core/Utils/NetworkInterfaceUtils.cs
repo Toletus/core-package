@@ -8,6 +8,37 @@ namespace Toletus.Pack.Core.Utils;
 
 public abstract class NetworkInterfaceUtils
 {
+    public static NetworkInterface? GetDefaultNetworkInterface()
+    {
+        NetworkInterface? defaultInterface = null;
+        foreach (NetworkInterface networkInterface in NetworkInterface.GetAllNetworkInterfaces())
+        {
+            // Check if the network interface is up and active
+            if (networkInterface.OperationalStatus == OperationalStatus.Up &&
+                (networkInterface.NetworkInterfaceType != NetworkInterfaceType.Loopback &&
+                 networkInterface.NetworkInterfaceType != NetworkInterfaceType.Tunnel))
+            {
+                // Get the properties of the network interface
+                IPInterfaceProperties properties = networkInterface.GetIPProperties();
+            
+                // Check if the interface has a gateway address (indicating it is used for outbound connections)
+                foreach (GatewayIPAddressInformation gateway in properties.GatewayAddresses)
+                {
+                    if (!gateway.Address.Equals(IPAddress.None))
+                    {
+                        defaultInterface = networkInterface;
+                        break; // Exit the loop if a valid default interface is found
+                    }
+                }
+
+                if (defaultInterface != null)
+                    break; // Exit the outer loop once the default interface is determined
+            }
+        }
+        return defaultInterface; // Return the default network interface or null if not found
+    }
+
+
     public static Dictionary<string, IPAddress> GetNetworkInterfaces()
     {
         var redes = new Dictionary<string, IPAddress>();
