@@ -20,7 +20,7 @@ public abstract class NetworkInterfaceUtils
             {
                 // Get the properties of the network interface
                 IPInterfaceProperties properties = networkInterface.GetIPProperties();
-            
+
                 // Check if the interface has a gateway address (indicating it is used for outbound connections)
                 foreach (GatewayIPAddressInformation gateway in properties.GatewayAddresses)
                 {
@@ -35,9 +35,30 @@ public abstract class NetworkInterfaceUtils
                     break; // Exit the outer loop once the default interface is determined
             }
         }
+
         return defaultInterface; // Return the default network interface or null if not found
     }
 
+    public static IPAddress? GetDefaultNetworkIPAddress()
+    {
+        NetworkInterface? defaultInterface = GetDefaultNetworkInterface();
+        if (defaultInterface != null)
+        {
+            IPInterfaceProperties properties = defaultInterface.GetIPProperties();
+            foreach (UnicastIPAddressInformation ipInfo in properties.UnicastAddresses)
+            {
+                // Check if the IP address is not a loopback and is IPv4 (you can modify for IPv6 if needed)
+                if (ipInfo.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork &&
+                    !IPAddress.IsLoopback(ipInfo.Address))
+                {
+                    return ipInfo.Address; // Return the first valid IPv4 address found
+                }
+            }
+        }
+
+        return null; // Return null if no IP address is found
+    }
+    
     public static Dictionary<string, IPAddress> GetNetworkInterfaces()
     {
         var redes = new Dictionary<string, IPAddress>();
