@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6</TargetFramework>
+		<TargetFramework>net8</TargetFramework>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Enums.NET" Version="4.0.1" />
+	  <PackageReference Include="Enums.NET" Version="5.0.0" />
 	</ItemGroup>
 
 </Project>
