@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Toletus.Pack.Core.Extensions
 {
@@ -24,8 +25,9 @@ namespace Toletus.Pack.Core.Extensions
 
         public static string RemoveDiacritics(this string input)
         {
-            var tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(input);
-            var asciiStr = System.Text.Encoding.UTF8.GetString(tempBytes);
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            var tempBytes = Encoding.GetEncoding("ISO-8859-8").GetBytes(input);
+            var asciiStr = Encoding.UTF8.GetString(tempBytes);
 
             return asciiStr;
         }
