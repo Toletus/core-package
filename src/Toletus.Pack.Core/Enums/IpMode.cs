@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Toletus.Pack.Core.EnumsNet;
+namespace Toletus.Pack.Core.Enums;
 
 public enum IpMode
 {

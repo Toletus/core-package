@@ -13,7 +13,7 @@ public class EnumUtils
     
     public static string[] GetDescriptions<T>()  where T : struct, Enum
     {
-        var values = Enums.GetValues(typeof(T));
+        var values = EnumsNET.Enums.GetValues(typeof(T));
 
         var descriptions = values.Select(c => ((T)c).AsString(EnumFormat.Description)).ToArray();
 
