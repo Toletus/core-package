@@ -1,44 +1,43 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Toletus.Pack.Core.Extensions
+namespace Toletus.Pack.Core.Extensions;
+
+public static class HexExtensions
 {
-    public static class HexExtensions
+    public static byte[] ToByteArray(this string hexString)
     {
-        public static byte[] ToByteArray(this string hexString)
+        var noBlanks = Regex.Replace(hexString, @"\s+", "");
+        var outputLength = noBlanks.Length / 2;
+        var output = new byte[outputLength];
+        var numeral = new char[2];
+        using (var sr = new System.IO.StringReader(noBlanks))
         {
-            var noBlanks = Regex.Replace(hexString, @"\s+", "");
-            var outputLength = noBlanks.Length / 2;
-            var output = new byte[outputLength];
-            var numeral = new char[2];
-            using (var sr = new System.IO.StringReader(noBlanks))
+            for (var i = 0; i < outputLength; i++)
             {
-                for (var i = 0; i < outputLength; i++)
-                {
-                    numeral[0] = (char)sr.Read();
-                    numeral[1] = (char)sr.Read();
-                    output[i] = Convert.ToByte(new string(numeral), 16);
-                }
+                numeral[0] = (char)sr.Read();
+                numeral[1] = (char)sr.Read();
+                output[i] = Convert.ToByte(new string(numeral), 16);
             }
-
-            return output;
         }
 
-        public static string[]? ToHexStringArray(this byte[]? byteArray)
-        {
-            if (byteArray == null) return null;
+        return output;
+    }
 
-            var hexArray = new string[byteArray.Length];
+    public static string[]? ToHexStringArray(this byte[]? byteArray)
+    {
+        if (byteArray == null) return null;
 
-            for (var i = 0; i < byteArray.Length; i++)
-                hexArray[i] = byteArray[i].ToString("x2");
+        var hexArray = new string[byteArray.Length];
 
-            return hexArray;
-        }
+        for (var i = 0; i < byteArray.Length; i++)
+            hexArray[i] = byteArray[i].ToString("x2");
 
-        public static string ToHexString(this byte[] byteArray, string? separator = null)
-        {
-            return string.Join(separator ?? string.Empty, byteArray.ToHexStringArray()!);
-        }
+        return hexArray;
+    }
+
+    public static string ToHexString(this byte[] byteArray, string? separator = null)
+    {
+        return string.Join(separator ?? string.Empty, byteArray.ToHexStringArray()!);
     }
 }
