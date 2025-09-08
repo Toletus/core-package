@@ -2,7 +2,7 @@ using Toletus.Pack.Core.Access.Enums;
 
 namespace Toletus.Pack.Core.Access.Converters;
 
-public static class FlowControlConverter
+public static class FlowControlEnumConverter
 {
     /// <summary>
     /// Converts entry and exit configurations to the corresponding flow type
