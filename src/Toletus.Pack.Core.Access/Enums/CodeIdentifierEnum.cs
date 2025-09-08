@@ -1,6 +1,6 @@
 namespace Toletus.Pack.Core.Access.Enums;
 
-public enum IdentifierTypeEnum
+public enum CodeIdentifierEnum
 {
     PersonCode,
     AccessPin
