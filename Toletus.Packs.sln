@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toletus.Pack.Core", "src\Toletus.Pack.Core\Toletus.Pack.Core.csproj", "{BD970C66-0E6F-4F36-B174-704D9A30D886}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toletus.Pack.Core.Access", "src\Toletus.Pack.Core.Access\Toletus.Pack.Core.Access.csproj", "{F7768883-D04D-404B-9FBD-32706023992A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,5 +22,9 @@ Global
 		{69FEF1C8-CDF5-4B71-890F-9810647F9CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69FEF1C8-CDF5-4B71-890F-9810647F9CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69FEF1C8-CDF5-4B71-890F-9810647F9CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7768883-D04D-404B-9FBD-32706023992A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7768883-D04D-404B-9FBD-32706023992A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7768883-D04D-404B-9FBD-32706023992A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7768883-D04D-404B-9FBD-32706023992A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
