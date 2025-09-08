@@ -7,6 +7,6 @@ public enum AccessMethodEnum
     Face,
     Fingerprint,
     Keyboard,
-    QRCode,
-    PersonId
+    PersonId,
+    QRCode
 }
