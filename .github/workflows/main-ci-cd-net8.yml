@@ -36,10 +36,10 @@ jobs:
 
       - name: Create the Package
         run: |
+          dotnet pack "src/Toletus.Pack.Core/Toletus.Pack.Core.csproj" --configuration Release /p:PackageVersion=${{ env.version }}  #-beta
           dotnet pack "src/Toletus.Pack.Core.Access/Toletus.Pack.Core.Access.csproj" --configuration Release /p:PackageVersion=${{ env.version }}  #-beta
 
       - name: Publish packages on Nuget
         run: |
-          echo ${{ secrets.NUGET_API_KEY }}
           dotnet nuget push "src/Toletus.Pack.Core/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
           dotnet nuget push "src/Toletus.Pack.Core.Access/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
