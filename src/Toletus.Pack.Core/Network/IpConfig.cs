@@ -1,7 +1,7 @@
 ﻿using System.Net;
-using Toletus.Pack.Core.Enums;
+using Toletus.Pack.Core.Network.Enums;
 
-namespace Toletus.Pack.Core;
+namespace Toletus.Pack.Core.Network;
 
 public class IpConfig
 {

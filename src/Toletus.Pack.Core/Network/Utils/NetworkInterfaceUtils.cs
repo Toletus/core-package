@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
-namespace Toletus.Pack.Core.Utils;
+namespace Toletus.Pack.Core.Network.Utils;
 
 public abstract class NetworkInterfaceUtils
 {
