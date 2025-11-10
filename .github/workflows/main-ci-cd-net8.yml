@@ -4,30 +4,25 @@ on:
   workflow_dispatch:
   push:
     branches:
-      main
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
-          source-url: https://nuget.pkg.github.com/toletus/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Set version number environment variable
-        env:
-          github_ref: ${{ github.ref }}
         run: |
           version='8.${{ github.run_number }}.${{ github.run_attempt }}'
-           echo version=$version
-           echo "version=$version" >> $GITHUB_ENV
+          echo "version=$version"
+          echo "version=$version" >> $GITHUB_ENV
 
       - name: Build with dotnet
         run: |
@@ -36,10 +31,27 @@ jobs:
 
       - name: Create the Package
         run: |
-          dotnet pack "src/Toletus.Pack.Core/Toletus.Pack.Core.csproj" --configuration Release /p:PackageVersion=${{ env.version }}  #-beta
-          dotnet pack "src/Toletus.Pack.Core.Access/Toletus.Pack.Core.Access.csproj" --configuration Release /p:PackageVersion=${{ env.version }}  #-beta
+          dotnet pack "src/Toletus.Pack.Core/Toletus.Pack.Core.csproj" --configuration Release -p:PackageVersion=${{ env.version }} --no-build
+          dotnet pack "src/Toletus.Pack.Core.Access/Toletus.Pack.Core.Access.csproj" --configuration Release -p:PackageVersion=${{ env.version }} --no-build
 
-      - name: Publish packages on Nuget
+      - name: List generated packages
         run: |
-          dotnet nuget push "src/Toletus.Pack.Core/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
-          dotnet nuget push "src/Toletus.Pack.Core.Access/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+          echo "Packages in Toletus.Pack.Core:"
+          ls -la src/Toletus.Pack.Core/bin/Release/*.nupkg || echo "No packages found"
+          echo "Packages in Toletus.Pack.Core.Access:"
+          ls -la src/Toletus.Pack.Core.Access/bin/Release/*.nupkg || echo "No packages found"
+
+      - name: Publish Toletus.Pack.Core
+        run: |
+          dotnet nuget push "src/Toletus.Pack.Core/bin/Release/*.nupkg" \
+            --source https://api.nuget.org/v3/index.json \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --skip-duplicate
+        continue-on-error: true
+
+      - name: Publish Toletus.Pack.Core.Access
+        run: |
+          dotnet nuget push "src/Toletus.Pack.Core.Access/bin/Release/*.nupkg" \
+            --source https://api.nuget.org/v3/index.json \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --skip-duplicate
