@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<TargetFramework>net8</TargetFramework>
 		<Nullable>enable</Nullable>
-		<PackageId>Toletus.Pack.Core.V2</PackageId>
 	</PropertyGroup>
 
 	<ItemGroup>
