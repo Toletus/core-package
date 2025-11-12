@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      main
 
 jobs:
   build-and-deploy:
@@ -26,20 +26,20 @@ jobs:
           github_ref: ${{ github.ref }}
         run: |
           version='8.${{ github.run_number }}.${{ github.run_attempt }}'
-          echo version=$version
-          echo "version=$version" >> $GITHUB_ENV
+           echo version=$version
+           echo "version=$version" >> $GITHUB_ENV
 
       - name: Build with dotnet
         run: |
-          dotnet build "src/Toletus.Pack.Core/Toletus.Pack.Core.csproj" --configuration Release -p:Version=${{ env.version }} -p:PackageId=Toletus.Pack.Core.V2
-          dotnet build "src/Toletus.Pack.Core.Access/Toletus.Pack.Core.Access.csproj" --configuration Release -p:Version=${{ env.version }} -p:PackageId=Toletus.Pack.Core.Access.V2
+          dotnet build "src/Toletus.Pack.Core/Toletus.Pack.Core.csproj" --configuration Release -p:Version=${{ env.version }}
+          dotnet build "src/Toletus.Pack.Core.Access/Toletus.Pack.Core.Access.csproj" --configuration Release -p:Version=${{ env.version }}
 
       - name: Create the Package
         run: |
-          dotnet pack "src/Toletus.Pack.Core/Toletus.Pack.Core.csproj" --configuration Release /p:PackageVersion=${{ env.version }} /p:PackageId=Toletus.Pack.Core.V2
-          dotnet pack "src/Toletus.Pack.Core.Access/Toletus.Pack.Core.Access.csproj" --configuration Release /p:PackageVersion=${{ env.version }} /p:PackageId=Toletus.Pack.Core.Access.V2
+          dotnet pack "src/Toletus.Pack.Core/Toletus.Pack.Core.csproj" --configuration Release /p:PackageVersion=${{ env.version }}  #-beta
+          dotnet pack "src/Toletus.Pack.Core.Access/Toletus.Pack.Core.Access.csproj" --configuration Release /p:PackageVersion=${{ env.version }}  #-beta
 
       - name: Publish packages on Nuget
         run: |
-          dotnet nuget push "src/Toletus.Pack.Core/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
-          dotnet nuget push "src/Toletus.Pack.Core.Access/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+          dotnet nuget push "src/Toletus.Pack.Core/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+          dotnet nuget push "src/Toletus.Pack.Core.Access/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
