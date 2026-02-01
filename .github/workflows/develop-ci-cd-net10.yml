@@ -1,0 +1,46 @@
+name: Develop (beta)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+          source-url: https://nuget.pkg.github.com/toletus/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set version number environment variable
+        run: |
+          version='10.${{ github.run_number }}.${{ github.run_attempt }}'
+          echo "version=$version"
+          echo "version=$version" >> $GITHUB_ENV
+
+      - name: Build with dotnet
+        run: |
+          dotnet build "src/Toletus.Pack.Core/Toletus.Pack.Core.csproj" --configuration Release -p:Version=${{ env.version }}
+          dotnet build "src/Toletus.Pack.Core.Access.Logic/Toletus.Pack.Core.Access.Logic.csproj" --configuration Release -p:Version=${{ env.version }}
+          dotnet build "src/Toletus.Pack.Core.Access/Toletus.Pack.Core.Access.csproj" --configuration Release -p:Version=${{ env.version }}
+
+      - name: Create the Package
+        run: |
+          dotnet pack "src/Toletus.Pack.Core/Toletus.Pack.Core.csproj" --configuration Release /p:PackageVersion=${{ env.version }}-beta
+          dotnet pack "src/Toletus.Pack.Core.Access.Logic/Toletus.Pack.Core.Access.Logic.csproj" --configuration Release /p:PackageVersion=${{ env.version }}-beta
+          dotnet pack "src/Toletus.Pack.Core.Access/Toletus.Pack.Core.Access.csproj" --configuration Release /p:PackageVersion=${{ env.version }}-beta
+
+      - name: Publish packages on Nuget
+        run: |
+          dotnet nuget push "src/Toletus.Pack.Core/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+          dotnet nuget push "src/Toletus.Pack.Core.Access.Logic/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+          dotnet nuget push "src/Toletus.Pack.Core.Access/bin/Release/*.nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}

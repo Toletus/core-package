@@ -1,4 +1,6 @@
 using Toletus.Pack.Core.Access.Enums;
+using Toletus.Pack.Core.Access.Logic;
+using Toletus.Pack.Core.Access.Logic.Enums;
 
 namespace Toletus.Pack.Core.Access.Converters;
 
