@@ -1,4 +1,4 @@
-namespace Toletus.Pack.Core.Access.Logic.Enums;
+namespace Toletus.Pack.Core.Access.Enums;
 
 /// <summary>
 /// Policy for a *specific direction* (Entry or Exit) defined in device config.

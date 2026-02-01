@@ -4,6 +4,11 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>Toletus.Pack.Core.Access.Logic</RootNamespace>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Toletus.Pack.Core.Access\Toletus.Pack.Core.Access.csproj" />
+    </ItemGroup>
 
 </Project>

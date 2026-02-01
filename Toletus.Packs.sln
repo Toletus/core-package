@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toletus.Pack.Core", "src\To
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toletus.Pack.Core.Access", "src\Toletus.Pack.Core.Access\Toletus.Pack.Core.Access.csproj", "{F7768883-D04D-404B-9FBD-32706023992A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toletus.Pack.Core.Access.Logic", "src\Toletus.Pack.Core.Access.Logic\Toletus.Pack.Core.Access.Logic.csproj", "{400A6A41-12DC-4E13-B481-645089D2613A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toletus.Pack.Access.Logic", "src\Toletus.Pack.Access.Logic\Toletus.Pack.Access.Logic.csproj", "{400A6A41-12DC-4E13-B481-645089D2613A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
