@@ -1,6 +1,6 @@
 namespace Toletus.Pack.Core.Access.Enums;
 
-public enum DirectionControlEnum
+public enum DirectionPolicyEnum
 {
     Blocked,    // travado (não gira)
     Free,       // livre (gira sem autorização)

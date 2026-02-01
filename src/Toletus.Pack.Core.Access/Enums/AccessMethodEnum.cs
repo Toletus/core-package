@@ -9,6 +9,6 @@ public enum AccessMethodEnum
     Keyboard,
     PersonId,
     QRCode,
-    F2,
-    F3
+    F2ManualEntryRelease,
+    F3ManualExitRelease
 }

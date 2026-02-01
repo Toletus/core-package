@@ -10,19 +10,19 @@ public static class FlowControlEnumConverter
     /// <param name="entryMode">Entry control mode</param>
     /// <param name="exitMode">Exit control mode</param>
     /// <returns>Flow type based on the configurations</returns>
-    public static FlowControlEnum ConvertToFlow(DirectionControlEnum entryMode, DirectionControlEnum exitMode) =>
+    public static FlowControlEnum ConvertToFlow(DirectionPolicyEnum entryMode, DirectionPolicyEnum exitMode) =>
         (entryMode, exitMode) switch
         {
-            (DirectionControlEnum.Blocked, DirectionControlEnum.Blocked) => FlowControlEnum.EntryAndExitBlocked,
+            (DirectionPolicyEnum.Blocked, DirectionPolicyEnum.Blocked) => FlowControlEnum.EntryAndExitBlocked,
             
-            (DirectionControlEnum.Blocked, _) => FlowControlEnum.ExitWithEntryBlocked,
-            (_, DirectionControlEnum.Blocked) => FlowControlEnum.EntryWithExitBlocked,
+            (DirectionPolicyEnum.Blocked, _) => FlowControlEnum.ExitWithEntryBlocked,
+            (_, DirectionPolicyEnum.Blocked) => FlowControlEnum.EntryWithExitBlocked,
             
-            (DirectionControlEnum.Controlled, DirectionControlEnum.Free) => FlowControlEnum.EntryWithExitFree,
-            (DirectionControlEnum.Free, DirectionControlEnum.Controlled) => FlowControlEnum.ExitWithEntryFree,
+            (DirectionPolicyEnum.Controlled, DirectionPolicyEnum.Free) => FlowControlEnum.EntryWithExitFree,
+            (DirectionPolicyEnum.Free, DirectionPolicyEnum.Controlled) => FlowControlEnum.ExitWithEntryFree,
             
-            (DirectionControlEnum.Controlled, DirectionControlEnum.Controlled) => FlowControlEnum.EntryAndExitFree,
-            (DirectionControlEnum.Free, DirectionControlEnum.Free) => FlowControlEnum.EntryAndExitFree,
+            (DirectionPolicyEnum.Controlled, DirectionPolicyEnum.Controlled) => FlowControlEnum.EntryAndExitFree,
+            (DirectionPolicyEnum.Free, DirectionPolicyEnum.Free) => FlowControlEnum.EntryAndExitFree,
             
             _ => FlowControlEnum.EntryExit
         };
