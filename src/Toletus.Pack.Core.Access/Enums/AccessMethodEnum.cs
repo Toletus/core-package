@@ -6,6 +6,7 @@ namespace Toletus.Pack.Core.Access.Enums;
 /// - Most values represent identification methods (Card, Face, QRCode, etc.)
 /// - F2/F3 represent explicit operator manual commands (NOT identification).
 /// </summary>
+[Obsolete]
 public enum AccessMethodEnum
 {
     Bluetooth,
