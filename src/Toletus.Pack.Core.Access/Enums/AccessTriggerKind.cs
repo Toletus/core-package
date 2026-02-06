@@ -40,5 +40,18 @@ public enum AccessTriggerKind
     /// - No automatic credential validation occurs in this mode.
     /// - Typically initiated from the person's profile in the SaaS.
     /// </summary>
-    ManualTargeted
+    ManualTargeted,
+    
+    /// <summary>
+    /// Access was originally denied by the system and later
+    /// explicitly overridden by a human operator.
+    ///
+    /// This represents a conscious bypass of an automatic decision.
+    ///
+    /// IMPORTANT:
+    /// - A prior automatic evaluation exists.
+    /// - The original denial reason must be preserved in audit logs.
+    /// - This is NOT a simple manual release.
+    /// </summary>
+    ManualOverrideDenied
 }
